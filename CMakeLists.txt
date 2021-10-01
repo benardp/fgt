@@ -76,6 +76,7 @@ else()
         )
 endif()
 target_include_directories(fgt INTERFACE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     "$<BUILD_INTERFACE:${EIGEN3_INCLUDE_DIR}>"
     "$<INSTALL_INTERFACE:include>"
     PRIVATE include ${NANOFLANN_SOURCE_DIR}/include ${EIGEN3_INCLUDE_DIR}
