@@ -94,9 +94,8 @@ if(WITH_OPENMP)
 endif()
 if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
     target_compile_options(fgt
-        PUBLIC
-        -std=c++11
         PRIVATE
+        -std=c++11	
         -Wall
         -pedantic
         # The no-nested-anon-types is for nanoflann
@@ -104,11 +103,10 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
         )
 elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
     target_compile_options(fgt
-        PUBLIC
+        PRIVATE
         -std=c++11
         # For some deprecations inside Eigen
         -Wno-deprecated-declarations
-        PRIVATE
         -Wall
         -pedantic
         # For pragma omp's
@@ -153,9 +151,9 @@ if(WITH_TESTS)
     add_subdirectory("${PROJECT_SOURCE_DIR}/vendor/googletest-release-1.10.0/googletest")
 
     set_target_properties(gtest PROPERTIES MACOSX_RPATH ON)
-    target_compile_options(gtest PUBLIC -std=c++11)
+    target_compile_options(gtest PRIVATE -std=c++11)
     set_target_properties(gtest_main PROPERTIES MACOSX_RPATH ON)
-    target_compile_options(gtest_main PUBLIC -std=c++11)
+    target_compile_options(gtest_main PRIVATE -std=c++11)
 
     add_subdirectory(test)
 endif()
