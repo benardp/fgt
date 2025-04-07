@@ -75,7 +75,7 @@ else()
 endif()
 target_include_directories(fgt INTERFACE
     "$<BUILD_INTERFACE:${EIGEN3_INCLUDE_DIR}>"
-    "$<INSTALL_INTERFACE:include>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
     PRIVATE include ${NANOFLANN_SOURCE_DIR}/include ${EIGEN3_INCLUDE_DIR}
     )
 set_target_properties(fgt PROPERTIES
@@ -123,14 +123,14 @@ elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "MSVC")
         /wd4711
         )
 endif()
-install(FILES
-    include/fgt.hpp
-    DESTINATION include
-    )
-install(TARGETS fgt
-    DESTINATION lib
-    EXPORT fgt-targets
-    )
+# install(FILES
+#     include/fgt.hpp
+#     DESTINATION include
+#     )
+# install(TARGETS fgt
+#     DESTINATION lib
+#     EXPORT fgt-targets
+#     )
 
 configure_file(Doxyfile.in ${PROJECT_BINARY_DIR}/Doxyfile)
 add_custom_target(docs
@@ -162,12 +162,12 @@ write_basic_package_version_file(
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
     )
-install(FILES
-    ${PROJECT_BINARY_DIR}/fgt-config.cmake
-    ${PROJECT_BINARY_DIR}/fgt-config-version.cmake
-    DESTINATION lib/cmake/fgt
-    )
-install(EXPORT fgt-targets
-    DESTINATION lib/cmake/fgt
-    NAMESPACE Fgt::
-    )
+# install(FILES
+#     ${PROJECT_BINARY_DIR}/fgt-config.cmake
+#     ${PROJECT_BINARY_DIR}/fgt-config-version.cmake
+#     DESTINATION lib/cmake/fgt
+#     )
+# install(EXPORT fgt-targets
+#     DESTINATION lib/cmake/fgt
+#     NAMESPACE Fgt::
+#     )
